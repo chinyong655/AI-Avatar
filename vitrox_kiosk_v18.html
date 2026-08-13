@@ -2418,50 +2418,8 @@ function speakText(text, avaEl){
   speechSynthesis.speak(utter);
 }
 
-/* Welcome greeting — voices only the title+subtitle narrative, nothing about the buttons,
-   and only while the visitor is still on the welcome screen (per spec). */
-const WELCOME_GREETING = {
-  en:"Welcome to ViTrox. Discover how AI-powered inspection solutions transform semiconductor and electronics manufacturing.",
-  zh:"欢迎来到ViTrox。了解AI驱动的检测方案如何改变半导体与电子制造业。",
-  ja:"ViTroxへようこそ。AI搭載の検査ソリューションが半導体・電子機器製造をどう変えるかをご覧ください。"
-};
-let greetingSpoken = false;
-function speakGreeting(){
-  speakText(WELCOME_GREETING[currentLang] || WELCOME_GREETING.en, document.getElementById('welcomeAvaHologram'));
-  greetingSpoken = true;
-}
-document.getElementById('welcomePhoto').style.backgroundImage = `url('${VITROX_BUILDING_PHOTO}')`;
-document.querySelector('#welcomeAvaHologram video').src = PRODUCT_PHOTOS.welcome_ava_hologram_mp4;
-document.getElementById('welcomeAvaHologram').addEventListener('click', (e)=>{
-  e.stopPropagation(); // don't also fire the view-WELCOME click-to-speak handler below
-  if(!greetingSpoken) speakGreeting();
-  else speakText(WELCOME_GREETING[currentLang] || WELCOME_GREETING.en, document.getElementById('welcomeAvaHologram'));
-});
-speakGreeting(); // works immediately in some browsers/kiosk configs
-document.getElementById('view-WELCOME').addEventListener('click', ()=>{ if(!greetingSpoken) speakGreeting(); }, { once:true });
-['btnExplore','btnFinder','btnQuiz'].forEach(id=>{
-  document.getElementById(id).addEventListener('click', ()=> speechSynthesis.cancel(), { capture:true }); // stop voice the moment they leave welcome
-});
 
-/* ---- init ---- */
-applyStaticI18n();
-render();
-</script>
-<!-- D-ID Live Avatar Agent (Fabio) — full mode, rendered inside our own
-     #didAgentContainer so it's clearly visible behind a labeled button,
-     instead of the easy-to-miss floating "fabio" bubble. -->
-<script type="module"
-  src="https://agent.d-id.com/v2/index.js"
-  data-mode="full"
-  data-target-id="didAgentContainer"
-  data-client-key="ck_ZlNebbT_4Lt0BfRjPKB24"
-  data-agent-id="v2_agt_p8jo0PLi"
-  data-name="did-agent"
-  data-monitor="true"
-  data-orientation="horizontal"
-  data-auto-connect="true">
-</script>
-</body>
+
   <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
