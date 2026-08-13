@@ -47,11 +47,15 @@
     z-index:10; overflow:hidden;
   }
   #view-WELCOME.active{display:flex;}
-  .welcome-photo{
-    position:absolute;inset:0;background-size:cover;background-position:center 55%;
-    animation:kenburns 30s ease-in-out infinite alternate; z-index:-1;
-  }
-  @keyframes kenburns{0%{transform:scale(1.0);}100%{transform:scale(1.09);}}
+  .welcome-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  z-index:-1;
+}
   .motion-bg{position:absolute;inset:0;opacity:.5;}
   .motion-bg .line{position:absolute;height:1px;background:linear-gradient(90deg,transparent,#4DA8DA,transparent);width:60%;animation:sweep 6s linear infinite;}
   .motion-bg .line:nth-child(1){top:20%;animation-delay:0s;}
@@ -451,7 +455,9 @@
 
   <!-- ============ SCREEN 1: WELCOME ============ -->
   <div class="view" id="view-WELCOME">
-    <div class="welcome-photo" id="welcomePhoto"></div>
+    <video class="welcome-video" id="welcomeVideo" autoplay muted loop playsinline>
+  <source src="related_to_AI_Avatar_as_a_Inte.mp4" type="video/mp4">
+</video>
     <div class="motion-bg"><div class="line"></div><div class="line"></div><div class="line"></div></div>
     <div class="welcome-content">
       <div class="welcome-logo">VITROX INTERACTIVE SHOWROOM</div>
@@ -2413,7 +2419,6 @@ function speakGreeting(){
   speakText(WELCOME_GREETING[currentLang] || WELCOME_GREETING.en, null);
   greetingSpoken = true;
 }
-document.getElementById('welcomePhoto').style.backgroundImage = `url('${VITROX_BUILDING_PHOTO}')`;
 speakGreeting(); // works immediately in some browsers/kiosk configs
 document.getElementById('view-WELCOME').addEventListener('click', ()=>{ if(!greetingSpoken) speakGreeting(); }, { once:true });
 ['btnExplore','btnFinder','btnQuiz'].forEach(id=>{
