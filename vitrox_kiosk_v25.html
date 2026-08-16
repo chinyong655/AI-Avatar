@@ -2626,27 +2626,48 @@ applyStaticI18n();
 render();
 </script>
 </body>
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <title>公司欢迎页</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VisionSmart Guide</title>
 </head>
 <body>
 
-  <!-- 🎯 数字人视频放置区域（首页欢迎区） -->
-  <div style="text-align: center; margin: 20px auto; max-width: 600px;">
-    <h2>欢迎来到我们公司！</h2>
-    
-    <video autoplay muted loop playsinline style="width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-      <!-- 相对路径指向同仓库里的视频 -->
-      <source src="related_to_AI_Avatar_as_a_Inte.mp4" type="video/mp4">
-      您的浏览器不支持视频播放。
-    </video>
-  </div>
+    <!-- 1. 顶部导航/标题区（如果有） -->
+    <header>
+        <h1>Welcome to VisionSmart Guide (VSG)</h1>
+    </header>
 
-  <!-- 网页的其他主要内容 -->
-  <main>
-    <p>这里是公司介绍、业务板块等内容...</p>
+    <!-- 2. 欢迎内容主体区 -->
+    <main>
+        
+        <!-- ============================================== -->
+        <!-- 👇 就是这里！把整段视频代码粘贴在 <body> 内部想要展示的位置 👇 -->
+        <!-- ============================================== -->
+        <div style="width: 100%; max-width: 720px; margin: 20px auto; text-align: center;">
+            <video 
+                controls 
+                autoplay 
+                muted 
+                playsinline 
+                preload="auto"
+                style="width: 100%; height: auto; display: block; border-radius: 8px; background: #000;">
+                
+                <source src="./welcome.mp4" type="video/mp4">
+                <p style="color: white; padding: 20px;">您的浏览器不支持播放该视频。</p>
+            </video>
+        </div>
+        <!-- ============================================== -->
+        <!-- 👆 视频代码结束 👆 -->
+        <!-- ============================================== -->
+
+        <!-- 3. 视频下方的文字介绍或游戏按钮 -->
+        <section>
+            <p>点击下方开始体验智能质检互动。</p>
+        </section>
+
+    </main>
   </main>
 </html>
