@@ -2626,4 +2626,27 @@ applyStaticI18n();
 render();
 </script>
 </body>
+  <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>公司欢迎页</title>
+</head>
+<body>
+
+  <!-- 🎯 数字人视频放置区域（首页欢迎区） -->
+  <div style="text-align: center; margin: 20px auto; max-width: 600px;">
+    <h2>欢迎来到我们公司！</h2>
+    
+    <video autoplay muted loop playsinline style="width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+      <!-- 相对路径指向同仓库里的视频 -->
+      <source src="related_to_AI_Avatar_as_a_Inte.mp4" type="video/mp4">
+      您的浏览器不支持视频播放。
+    </video>
+  </div>
+
+  <!-- 网页的其他主要内容 -->
+  <main>
+    <p>这里是公司介绍、业务板块等内容...</p>
+  </main>
 </html>
