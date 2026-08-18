@@ -516,13 +516,13 @@
 <div id="kiosk">
 
   <!-- ============ SCREEN 1: WELCOME ============ -->
-  <div class="view" id="view-WELCOME">
+ <div class="view active" id="view-WELCOME">
     <video id="welcomeVideo" class="welcome-video" autoplay loop muted playsinline></video>
     <div class="motion-bg"><div class="line"></div><div class="line"></div><div class="line"></div></div>
     <button id="exploreNowBtn" style="position:absolute;right:28px;bottom:28px;z-index:5;background:linear-gradient(135deg,var(--warm),#FF5E3A);color:#fff;border:none;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;padding:16px 30px;border-radius:100px;cursor:pointer;box-shadow:0 14px 34px -10px rgba(255,92,63,.6);display:flex;align-items:center;gap:8px;">
       Start / Explore Now <span style="font-size:18px;">▶</span>
     </button>
-    <div class="welcome-content" id="welcomeContent" style="opacity:0;pointer-events:none;transform:translateY(14px);transition:opacity .5s ease, transform .5s ease;">
+    <div class="welcome-content" id="welcomeContent" style="opacity:1;pointer-events:all;transform:translateY(0);">
       <div class="welcome-logo">VITROX INTERACTIVE SHOWROOM</div>
       <div id="aiSpeakingBadge" style="display:none;align-items:center;gap:7px;justify-content:center;margin-bottom:10px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;color:var(--blue);">
         <span style="width:7px;height:7px;border-radius:50%;background:#4DA8DA;animation:pulse 1s ease-out infinite;"></span> AI GUIDE SPEAKING…
@@ -2633,6 +2633,20 @@ document.getElementById('exploreNowBtn').addEventListener('click', (e)=>{
 /* ---- init ---- */
 applyStaticI18n();
 render();
+</script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Show the welcome view
+    const welcomeView = document.getElementById("view-WELCOME");
+    const welcomeContent = document.getElementById("welcomeContent");
+    
+    if (welcomeView) welcomeView.classList.add("active");
+    if (welcomeContent) {
+      welcomeContent.style.opacity = "1";
+      welcomeContent.style.pointerEvents = "all";
+      welcomeContent.style.transform = "translateY(0)";
+    }
+  });
 </script>
   const welcomeVid = document.getElementById('welcomeVideo');
 if (welcomeVid && PRODUCT_PHOTOS.welcome_ava_hologram_mp4) {
