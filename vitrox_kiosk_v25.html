@@ -7,6 +7,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  .welcome-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  pointer-events: none;
+}
   :root{
     --blue:#00529B; --blue-deep:#003B70; --blue-ink:#002649;
     --white:#FFFFFF; --surface:#F3F7FF; --line:#DCE6F7; --text-dim:#5B6B84;
@@ -508,7 +517,7 @@
 
   <!-- ============ SCREEN 1: WELCOME ============ -->
   <div class="view" id="view-WELCOME">
-    <div class="welcome-photo" id="welcomePhoto"></div>
+    <video id="welcomeVideo" class="welcome-video" autoplay loop muted playsinline></video>
     <div class="motion-bg"><div class="line"></div><div class="line"></div><div class="line"></div></div>
     <button id="exploreNowBtn" style="position:absolute;right:28px;bottom:28px;z-index:5;background:linear-gradient(135deg,var(--warm),#FF5E3A);color:#fff;border:none;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;padding:16px 30px;border-radius:100px;cursor:pointer;box-shadow:0 14px 34px -10px rgba(255,92,63,.6);display:flex;align-items:center;gap:8px;">
       Start / Explore Now <span style="font-size:18px;">▶</span>
@@ -2625,6 +2634,11 @@ document.getElementById('exploreNowBtn').addEventListener('click', (e)=>{
 applyStaticI18n();
 render();
 </script>
+  const welcomeVid = document.getElementById('welcomeVideo');
+if (welcomeVid && PRODUCT_PHOTOS.welcome_ava_hologram_mp4) {
+  welcomeVid.src = PRODUCT_PHOTOS.welcome_ava_hologram_mp4;
+  welcomeVid.play().catch(e => console.log('Autoplay error:', e));
+}
 </body>
 <!DOCTYPE html>
 <html lang="zh-CN">
