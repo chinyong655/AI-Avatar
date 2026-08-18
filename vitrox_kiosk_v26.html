@@ -7,6 +7,27 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ViTrox Kiosk — Tech Blue Experience</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ====== 放在这里 ====== */
+  .welcome-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+  }
+  /* ====================== */
+
+  :root{
+    --blue:#00529B; --blue-deep:#003B70; --blue-ink:#002649;
   :root{
     --blue:#00529B; --blue-deep:#003B70; --blue-ink:#002649;
     --white:#FFFFFF; --surface:#F3F7FF; --line:#DCE6F7; --text-dim:#5B6B84;
@@ -161,7 +182,7 @@
   .viewer-card{background:#002649;border-radius:18px;padding:16px;position:relative;overflow:hidden;min-height:280px;}
   .viewer3d{perspective:900px;height:200px;display:flex;align-items:center;justify-content:center;position:relative;touch-action:none;cursor:grab;}
   .viewer3d:active{cursor:grabbing;}
-  .viewer3d-inner{position:relative;transform-style:preserve-3d;transition:transform .05s linear;}
+  .viewer3d-inner{position:relative;transform-:preserve-3d;transition:transform .05s linear;}
   .viewer3d-inner svg{width:150px;height:150px;filter:drop-shadow(0 20px 30px rgba(0,0,0,.4));}
   .viewer3d-inner > div{border-radius:12px;overflow:hidden;filter:drop-shadow(0 20px 30px rgba(0,0,0,.4));}
   .viewer-platform{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);width:160px;height:20px;border-radius:50%;background:rgba(11,95,255,.25);filter:blur(6px);}
@@ -177,7 +198,7 @@
   .benefits-card .eyebrow2{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--blue);text-transform:uppercase;}
   .benefits-card h3{font-family:'Space Grotesk',sans-serif;font-size:16px;margin:6px 0 6px;color:var(--blue-ink);}
   .benefits-card .value{font-size:12px;color:var(--text-dim);line-height:1.55;margin:0 0 14px;}
-  .benefit-list{list-style:none;padding:0;margin:0 0 16px;display:flex;flex-direction:column;gap:9px;}
+  .benefit-list{list-:none;padding:0;margin:0 0 16px;display:flex;flex-direction:column;gap:9px;}
   .benefit-list li{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--blue-ink);}
   .benefit-list li .tick{width:20px;height:20px;border-radius:50%;background:rgba(34,192,138,.15);color:var(--good);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;font-weight:700;}
   .specs{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:6px;}
@@ -498,7 +519,7 @@
   .front-card{position:relative;}
   .new-badge{position:absolute;top:8px;left:8px;z-index:2;background:var(--warm);color:#fff;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.06em;padding:3px 8px;border-radius:100px;font-weight:700;}
   .agentic-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,var(--blue),#3B82FF);color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.05em;padding:5px 11px;border-radius:100px;font-weight:700;margin:6px 0;}
-</style>
+</>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jsqr/1.4.0/jsQR.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
@@ -507,7 +528,11 @@
 <div id="kiosk">
 
   <!-- ============ SCREEN 1: WELCOME ============ -->
-  <div class="view" id="view-WELCOME">
+  <div class="view active" id="view-WELCOME">
+    <video id="welcomeVideo" class="welcome-video" autoplay loop muted playsinline>
+    <source src="related_to_AI_Avatar_as_a_Inte.mp4" type="video/mp4">
+  </video>
+  <div class="motion-bg"><div class="line"></div><div class="line"></div><div class="line"></div></div>
     <div class="welcome-photo" id="welcomePhoto"></div>
     <div class="motion-bg"><div class="line"></div><div class="line"></div><div class="line"></div></div>
     <button id="exploreNowBtn" style="position:absolute;right:28px;bottom:28px;z-index:5;background:linear-gradient(135deg,var(--warm),#FF5E3A);color:#fff;border:none;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;padding:16px 30px;border-radius:100px;cursor:pointer;box-shadow:0 14px 34px -10px rgba(255,92,63,.6);display:flex;align-items:center;gap:8px;">
@@ -2625,5 +2650,32 @@ document.getElementById('exploreNowBtn').addEventListener('click', (e)=>{
 applyStaticI18n();
 render();
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const welcomeVid = document.getElementById("welcomeVideo");
+      const exploreBtn = document.getElementById("exploreNowBtn");
+      const welcomeView = document.getElementById("view-WELCOME");
+      const splitShell = document.getElementById("splitShell");
+
+      // 自动循环播放视频
+      if (welcomeVid) {
+        welcomeVid.play().catch(err => console.log("Autoplay waiting for interaction:", err));
+      }
+
+      // 点击按钮后：暂停视频并跳转进入主系统
+      if (exploreBtn) {
+        exploreBtn.addEventListener("click", function () {
+          if (welcomeVid) {
+            welcomeVid.pause();
+            welcomeVid.currentTime = 0;
+          }
+          if (welcomeView) welcomeView.classList.remove("active");
+          if (splitShell) splitShell.classList.add("active");
+        });
+      }
+    });
+  </script>
+</body>
+</html>                                                                       
 </body>
 </html>
