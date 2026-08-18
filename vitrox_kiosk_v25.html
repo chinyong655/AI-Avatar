@@ -7,15 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  .welcome-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-  pointer-events: none;
-}
   :root{
     --blue:#00529B; --blue-deep:#003B70; --blue-ink:#002649;
     --white:#FFFFFF; --surface:#F3F7FF; --line:#DCE6F7; --text-dim:#5B6B84;
@@ -516,13 +507,13 @@
 <div id="kiosk">
 
   <!-- ============ SCREEN 1: WELCOME ============ -->
- <div class="view active" id="view-WELCOME">
-    <video id="welcomeVideo" class="welcome-video" autoplay loop muted playsinline></video>
+  <div class="view" id="view-WELCOME">
+    <div class="welcome-photo" id="welcomePhoto"></div>
     <div class="motion-bg"><div class="line"></div><div class="line"></div><div class="line"></div></div>
     <button id="exploreNowBtn" style="position:absolute;right:28px;bottom:28px;z-index:5;background:linear-gradient(135deg,var(--warm),#FF5E3A);color:#fff;border:none;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;padding:16px 30px;border-radius:100px;cursor:pointer;box-shadow:0 14px 34px -10px rgba(255,92,63,.6);display:flex;align-items:center;gap:8px;">
       Start / Explore Now <span style="font-size:18px;">▶</span>
     </button>
-    <div class="welcome-content" id="welcomeContent" style="opacity:1;pointer-events:all;transform:translateY(0);">
+    <div class="welcome-content" id="welcomeContent" style="opacity:0;pointer-events:none;transform:translateY(14px);transition:opacity .5s ease, transform .5s ease;">
       <div class="welcome-logo">VITROX INTERACTIVE SHOWROOM</div>
       <div id="aiSpeakingBadge" style="display:none;align-items:center;gap:7px;justify-content:center;margin-bottom:10px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;color:var(--blue);">
         <span style="width:7px;height:7px;border-radius:50%;background:#4DA8DA;animation:pulse 1s ease-out infinite;"></span> AI GUIDE SPEAKING…
@@ -2634,68 +2625,5 @@ document.getElementById('exploreNowBtn').addEventListener('click', (e)=>{
 applyStaticI18n();
 render();
 </script>
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Show the welcome view
-    const welcomeView = document.getElementById("view-WELCOME");
-    const welcomeContent = document.getElementById("welcomeContent");
-    
-    if (welcomeView) welcomeView.classList.add("active");
-    if (welcomeContent) {
-      welcomeContent.style.opacity = "1";
-      welcomeContent.style.pointerEvents = "all";
-      welcomeContent.style.transform = "translateY(0)";
-    }
-  });
-</script>
-  const welcomeVid = document.getElementById('welcomeVideo');
-if (welcomeVid && PRODUCT_PHOTOS.welcome_ava_hologram_mp4) {
-  welcomeVid.src = PRODUCT_PHOTOS.welcome_ava_hologram_mp4;
-  welcomeVid.play().catch(e => console.log('Autoplay error:', e));
-}
 </body>
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VisionSmart Guide</title>
-</head>
-<body>
-
-    <!-- 1. 顶部导航/标题区（如果有） -->
-    <header>
-        <h1>Welcome to VisionSmart Guide (VSG)</h1>
-    </header>
-
-    <!-- 2. 欢迎内容主体区 -->
-    <main>
-        
-        <!-- ============================================== -->
-        <!-- 👇 就是这里！把整段视频代码粘贴在 <body> 内部想要展示的位置 👇 -->
-        <!-- ============================================== -->
-        <div style="width: 100%; max-width: 720px; margin: 20px auto; text-align: center;">
-            <video 
-                controls 
-                autoplay 
-                muted 
-                playsinline 
-                preload="auto"
-                style="width: 100%; height: auto; display: block; border-radius: 8px; background: #000;">
-                
-                <source src="./welcome.mp4" type="video/mp4">
-                <p style="color: white; padding: 20px;">您的浏览器不支持播放该视频。</p>
-            </video>
-        </div>
-        <!-- ============================================== -->
-        <!-- 👆 视频代码结束 👆 -->
-        <!-- ============================================== -->
-
-        <!-- 3. 视频下方的文字介绍或游戏按钮 -->
-        <section>
-            <p>点击下方开始体验智能质检互动。</p>
-        </section>
-
-    </main>
-  </main>
 </html>
