@@ -2637,5 +2637,58 @@ applyStaticI18n();
 render();
 </script>
   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+  const video = document.getElementById('welcomeAvaVideo');
+  const startBtn = document.getElementById('exploreNowBtn');          // 右下角 Start / Explore Now 按钮
+  const welcomeContent = document.querySelector('.welcome-content'); // 3 个选项卡片容器
+  const welcomeView = document.getElementById('view-WELCOME');        // 整个 Welcome 界面
+  const splitShell = document.getElementById('splitShell');          // 主界面
+      display: none; /* 初始隐藏，按了 Start Now 才显示 */
+  position: relative;
+  z-index: 10;
+}
+
+  // 1. 彻底禁用 AI 语音朗读 (防打扰)
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak = () => {}; 
+  }
+
+  // 2. 第一步：点击右下角 "Start / Explore Now"
+  if (startBtn) {
+    startBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+
+      // 开启 Video 自带的原音并播放
+      if (video) {
+        video.muted = false;
+        video.play().catch(err => console.log('Playback error:', err));
+      }
+
+      // 展开 3 个 Card，隐藏右下角按钮，画面保持在 Welcome 页面
+      if (welcomeContent) welcomeContent.style.display = 'block';
+      startBtn.style.display = 'none';
+    });
+  }
+
+  // 3. 第二步：只有点击 3 个 Card 里的任意一个，才跳转并暂停 Video
+  const optionCards = document.querySelectorAll('.welcome-content .welcome-btn, #btnExplore, #btnSolution, #btnChallenge');
+  
+  optionCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      e.stopPropagation();
+
+      // 停止视频播放
+      if (video) {
+        video.pause();
+        video.currentTime = 0;
+      }
+
+      // 切页进入下一个 Section
+      if (welcomeView) welcomeView.style.display = 'none';
+      if (splitShell) splitShell.classList.add('active');
+    });
+  });
+});
 </body>
 </html>
