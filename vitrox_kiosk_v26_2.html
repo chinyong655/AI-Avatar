@@ -2637,44 +2637,5 @@ applyStaticI18n();
 render();
 </script>
   <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const video = document.getElementById('welcomeAvaVideo');
-  const welcomeView = document.getElementById('view-WELCOME');
-  const splitShell = document.getElementById('splitShell');
-
-  // Select all welcome/explore buttons
-  const exploreBtns = document.querySelectorAll('#btnExplore, #exploreNowBtn, .welcome-btn');
-
-  // Handle navigation and pause video when clicked
-  exploreBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation(); // Prevents conflict with window click events
-      
-      // 1. Hide Welcome View
-      if (welcomeView) welcomeView.style.display = 'none';
-
-      // 2. Show Main Kiosk Area
-      if (splitShell) splitShell.classList.add('active');
-
-      // 3. Stop Video Playback completely
-      if (video) {
-        video.pause();
-        video.currentTime = 0;
-      }
-    });
-  });
-
-  // Enable audio on first user interaction (bypasses browser autoplay block)
-  const enableSound = () => {
-    if (video) {
-      video.muted = false;
-      video.play().catch(err => console.log('Audio playback policy:', err));
-    }
-  };
-
-  // Unmute video as soon as the user clicks anywhere on the page
-  window.addEventListener('click', enableSound, { once: true });
-});
-</script>
 </body>
 </html>
