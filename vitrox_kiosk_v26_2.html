@@ -1000,7 +1000,12 @@ function sessionTimeout(){
 function resetToWelcome(){ sessionTimeout(); }
 function updateDevHud(){ renderDevHud(); }
 
-document.getElementById('btnExplore').addEventListener('click', ()=> pushState({ name:'HOME' }));
+const myButton = document.getElementById("btn-id");
+if (myButton) {
+  myButton.addEventListener("click", function () {
+    // 你的代码
+  });
+}
 document.getElementById('btnFinder').addEventListener('click', ()=> pushState({ name:'FINDER' }));
 document.getElementById('btnQuiz').addEventListener('click', ()=>{
   pushState({ name:'HOME' });
