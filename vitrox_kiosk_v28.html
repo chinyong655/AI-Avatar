@@ -526,60 +526,54 @@
   <button class="dev-toggle" id="analyticsToggle" title="Backend Analytics Dashboard (staff view)">📊</button>
 
   <!-- ============ SCREEN 1: WELCOME ============ -->
+  <!-- ============ SCREEN 1: WELCOME ============ -->
   <div class="view active" id="view-WELCOME">
-   <!-- 1. 加上 pointer-events:none，视频就不会挡住点击 -->
-    <video id="welcomeAvaVideo" autoplay loop muted playsinline style="position:absolute; inset:0; width:100vw; height:100vh; object-fit:cover; z-index:0; pointer-events:none;">
+    <!-- 全屏数字人视频：默认直接带声播放 -->
+    <video id="welcomeAvaVideo" autoplay loop playsinline style="position:absolute; inset:0; width:100vw; height:100vh; object-fit:cover; z-index:1;">
       <source src="seedance_video_avatar.mp4" type="video/mp4">
     </video>
 
-    <!-- 2. 加上 onclick 事件和 z-index:999，点击立即开声音并显示菜单 -->
-    <button id="exploreNowBtn" onclick="enableAudioAndExplore()" style="position:absolute;right:28px;bottom:28px;z-index:999;background:linear-gradient(135deg,var(--warm),#FF5E3A);color:#fff;border:none;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;padding:16px 30px;border-radius:100px;cursor:pointer;box-shadow:0 14px 34px -10px rgba(255,92,63,.6);display:flex;align-items:center;gap:8px;">
+    <!-- 右下角 Start 按钮：点击后视频立即停止发声/暂停，并进入主系统 -->
+    <button id="exploreNowBtn" onclick="stopAvatarAndEnter()" style="position:absolute; right:28px; bottom:28px; z-index:999; background:linear-gradient(135deg,var(--warm),#FF5E3A); color:#fff; border:none; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; padding:16px 30px; border-radius:100px; cursor:pointer; box-shadow:0 14px 34px -10px rgba(255,92,63,.6); display:flex; align-items:center; gap:8px;">
       Start / Explore Now <span style="font-size:18px;">▶</span>
     </button>
-
-    <script>
-      function enableAudioAndExplore() {
-        const vid = document.getElementById('welcomeAvaVideo');
-        if (vid) {
-          vid.muted = false;
-          vid.currentTime = 0;
-          vid.play();
-        }
-        const content = document.getElementById('welcomeContent');
-        if (content) {
-          content.style.opacity = '1';
-          content.style.pointerEvents = 'all';
-          content.style.transform = 'translateY(0)';
-        }
-      }
-    </script>
-    <div class="welcome-content" id="welcomeContent" style="opacity:0;pointer-events:none;transform:translateY(14px);transition:opacity .5s ease, transform .5s ease;">
-      <div class="welcome-logo">VITROX INTERACTIVE SHOWROOM</div>
-      <div id="aiSpeakingBadge" style="display:none;align-items:center;gap:7px;justify-content:center;margin-bottom:10px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;color:var(--blue);">
-        <span style="width:7px;height:7px;border-radius:50%;background:#4DA8DA;animation:pulse 1s ease-out infinite;"></span> AI GUIDE SPEAKING…
-      </div>
-      <h1 data-i18n="welcomeTitle">Welcome to ViTrox</h1>
-      <p class="subtitle" data-i18n="welcomeSub">Discover how AI-powered inspection solutions transform semiconductor and electronics manufacturing.</p>
-      <div class="welcome-btn-row">
-        <div class="welcome-btn primary" id="btnExplore">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          <div class="lbl" data-i18n="btnExplore">Explore Products</div>
-          <div class="sub2" data-i18n="btnExploreSub">Browse all Business Units</div>
-        </div>
-        <div class="welcome-btn" id="btnFinder">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <div class="lbl" data-i18n="btnFinder">Find My Solution</div>
-          <div class="sub2" data-i18n="btnFinderSub">Not sure? We'll guide you</div>
-        </div>
-        <div class="welcome-btn warm" id="btnQuiz">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          <div class="lbl" data-i18n="btnChallenge">Take Tech Challenge</div>
-          <div class="sub2" data-i18n="btnChallengeSub">5 quick questions</div>
-        </div>
-      </div>
-    </div>
   </div>
 
+  <script>
+    const avatarVideo = document.getElementById('welcomeAvaVideo');
+
+    // 1. 一打开链接，立刻尝试带声音播放
+    if (avatarVideo) {
+      avatarVideo.muted = false;
+      avatarVideo.play().catch(() => {
+        // 如果遇到浏览器安全策略拦截，先静音播画面，用户碰触屏幕任意处瞬间解开声音
+        avatarVideo.muted = true;
+        avatarVideo.play();
+        const unlockAudio = () => {
+          avatarVideo.muted = false;
+          avatarVideo.currentTime = 0;
+          avatarVideo.play();
+          document.removeEventListener('click', unlockAudio);
+          document.removeEventListener('touchstart', unlockAudio);
+        };
+        document.addEventListener('click', unlockAudio);
+        document.addEventListener('touchstart', unlockAudio);
+      });
+    }
+
+    // 2. 访客点击右下角 Start 按钮：数字人立即闭嘴停止，切换到主界面
+    function stopAvatarAndEnter() {
+      if (avatarVideo) {
+        avatarVideo.pause();
+        avatarVideo.muted = true;
+      }
+      // 关闭 Welcome 画面，显示主操作页面 (Split Shell)
+      const welcomeView = document.getElementById('view-WELCOME');
+      const splitShell = document.getElementById('splitShell');
+      if (welcomeView) welcomeView.classList.remove('active');
+      if (splitShell) splitShell.classList.add('active');
+    }
+  </script>
   <!-- ============ SPLIT SHELL: everything else ============ -->
   <div class="split-shell" id="splitShell">
     <div class="left-panel">
