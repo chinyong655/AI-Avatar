@@ -39,6 +39,18 @@
 
   /* ============ WELCOME (Screen 1) ============ */
   #view-WELCOME{
+    <div id="view-WELCOME" class="active">
+  
+  <!-- ⬇️ 插入你的视频代码 ⬇️ -->
+  <video autoplay muted loop playsinline id="welcome-bg-video" style="position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
+    <source src="seedance_video_avatar.mp4" type="video/mp4">
+  </video>
+  <!-- ⬆️ 插入结束 ⬆️ -->
+
+  <!-- 这里是你原本 Welcome 页面的标题和按钮 -->
+  <h1>Welcome to ViTrox</h1>
+  ...
+</div>
     position:absolute;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;
     background:
       radial-gradient(circle at 15% 15%, rgba(0,82,155,.45), transparent 45%),
