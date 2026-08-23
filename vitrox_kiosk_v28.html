@@ -37,80 +37,58 @@
   .dh-feed-item b{color:var(--blue-deep);}
   .dh-note{font-size:10px;color:var(--text-dim);line-height:1.5;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);}
 
-  /* ============ WELCOME (Screen 1) ============ */
-  #view-WELCOME{
-    <div id="view-WELCOME" class="active" style="position: relative; width: 100vw; height: 100vh; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+ <!-- ================= WELCOME SCREEN (全内置样式，直接贴) ================= -->
+<div id="view-WELCOME" class="active" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; background: radial-gradient(circle at 15% 15%, rgba(0,82,155,.45), transparent 45%), radial-gradient(circle at 85% 85%, rgba(0,82,155,.35), transparent 45%), linear-gradient(180deg, rgba(2,10,24,.55) 0%, rgba(0,38,73,.75) 55%, rgba(0,82,155,.85) 100%); z-index: 10; overflow: hidden;">
 
-  <!-- 1. 背景视频 Avatar (自动适应全屏) -->
-  <video autoplay muted loop playsinline style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+  <!-- 1. 全屏背景视频 Avatar -->
+  <video autoplay muted loop playsinline style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; z-index: 1;">
     <source src="seedance_video_avatar.mp4" type="video/mp4">
   </video>
 
-  <!-- 2. 半透明遮罩 (保证文字和按钮清晰可见) -->
-  <div style="position: absolute; inset: 0; background: rgba(0, 38, 73, 0.55); z-index: 2;"></div>
+  <!-- 2. 半透明遮罩 (保证文字和按钮清晰) -->
+  <div style="position: absolute; inset: 0; background: rgba(2, 10, 24, 0.45); z-index: 2;"></div>
 
-  <!-- 3. 文字与按钮层 (浮在视频上方) -->
-  <div style="position: relative; z-index: 3; max-width: 800px; padding: 20px;">
-    <h1 style="color: #ffffff; font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; margin-bottom: 12px; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">
+  <!-- 3. 中央白色卡片面板 -->
+  <div style="position: relative; z-index: 3; padding: 36px 40px; background: rgba(255, 255, 255, 0.92); border-radius: 26px; box-shadow: 0 30px 70px -20px rgba(0, 20, 40, 0.45); max-width: 640px; margin: 0 20px; backdrop-filter: blur(10px);">
+    
+    <div style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; color: #00529B; letter-spacing: 0.08em; margin-bottom: 18px;">
+      VITROX KIOSK
+    </div>
+
+    <h1 style="font-family: 'Space Grotesk', sans-serif; font-size: 36px; margin: 0 0 12px; font-weight: 700; color: #001A36;">
       Welcome to ViTrox
     </h1>
-    <p style="color: #DCEBFF; font-size: 16px; margin-bottom: 30px; line-height: 1.6;">
-      Discover how AI-powered inspection solutions transform semiconductor and electronics manufacturing.
-    </p>
-    
-    <!-- 3个入口按钮 -->
-    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-      <button onclick="switchPage('HOME')" style="padding: 14px 28px; background: #FF7A45; color: #fff; border: none; border-radius: 50px; font-weight: 700; font-size: 15px; cursor: pointer; box-shadow: 0 4px 15px rgba(255,122,69,0.4);">
-        Explore Products ▶
+
+    <div style="color: #1A2B3C; font-size: 14.5px; max-width: 460px; line-height: 1.65; margin: 0 auto 34px;">
+      Discover our next-generation automated optical inspection and smart manufacturing solutions.
+    </div>
+
+    <!-- 4. 按钮组 -->
+    <div style="display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; max-width: 640px; margin: 0 auto;">
+      
+      <!-- 按钮 1 -->
+      <button onclick="switchPage('HOME')" style="background: linear-gradient(135deg, #00529B, #3B82FF); border: none; color: #fff; padding: 18px 22px; border-radius: 16px; cursor: pointer; width: 170px; display: flex; flex-direction: column; align-items: center; gap: 6px; box-shadow: 0 4px 15px rgba(0,82,155,0.3);">
+        <span style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 14px;">Explore Products</span>
+        <span style="font-size: 11px; color: #DCEBFF;">Showroom & Specs</span>
       </button>
-      <button onclick="switchPage('SOLUTION')" style="padding: 14px 28px; background: rgba(255,255,255,0.2); color: #fff; border: 1px solid #fff; border-radius: 50px; font-weight: 600; font-size: 15px; cursor: pointer; backdrop-filter: blur(5px);">
-        Find My Solution
+
+      <!-- 按钮 2 -->
+      <button onclick="switchPage('SOLUTION')" style="background: #ffffff; border: 1px solid #DCE6F7; color: #001A36; padding: 18px 22px; border-radius: 16px; cursor: pointer; width: 170px; display: flex; flex-direction: column; align-items: center; gap: 6px;">
+        <span style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 14px;">Find Solution</span>
+        <span style="font-size: 11px; color: #5B6B84;">Guided Match</span>
       </button>
-      <button onclick="switchPage('QUIZ')" style="padding: 14px 28px; background: rgba(255,255,255,0.2); color: #fff; border: 1px solid #fff; border-radius: 50px; font-weight: 600; font-size: 15px; cursor: pointer; backdrop-filter: blur(5px);">
-        Take Tech Challenge
+
+      <!-- 按钮 3 -->
+      <button onclick="switchPage('QUIZ')" style="background: linear-gradient(135deg, #FF7A45, #ff9a6a); border: none; color: #fff; padding: 18px 22px; border-radius: 16px; cursor: pointer; width: 170px; display: flex; flex-direction: column; align-items: center; gap: 6px; box-shadow: 0 4px 15px rgba(255,122,69,0.3);">
+        <span style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 14px;">Tech Challenge</span>
+        <span style="font-size: 11px; color: #FFE7DA;">Interactive Quiz</span>
       </button>
+
     </div>
   </div>
 
 </div>
-    position:absolute;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;
-    background:
-      radial-gradient(circle at 15% 15%, rgba(0,82,155,.45), transparent 45%),
-      radial-gradient(circle at 85% 85%, rgba(0,82,155,.35), transparent 45%),
-      linear-gradient(180deg, rgba(2,10,24,.55) 0%, rgba(0,38,73,.75) 55%, rgba(0,82,155,.85) 100%);
-    z-index:10; overflow:hidden;
-  }
-  #view-WELCOME.active{display:flex;}
-  .welcome-photo{
-    position:absolute;inset:0;background-size:cover;background-position:center 55%;
-    animation:kenburns 30s ease-in-out infinite alternate; z-index:-1;
-  }
-  @keyframes kenburns{0%{transform:scale(1.0);}100%{transform:scale(1.09);}}
-  .welcome-video-slot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;z-index:-1;}
-  .motion-bg{position:absolute;inset:0;opacity:.5;}
-  .motion-bg .line{position:absolute;height:1px;background:linear-gradient(90deg,transparent,#4DA8DA,transparent);width:60%;animation:sweep 6s linear infinite;}
-  .motion-bg .line:nth-child(1){top:20%;animation-delay:0s;}
-  .motion-bg .line:nth-child(2){top:50%;animation-delay:2s;}
-  .motion-bg .line:nth-child(3){top:75%;animation-delay:4s;}
-  @keyframes sweep{0%{transform:translateX(-120%);}100%{transform:translateX(120%);}}
-  .welcome-content{position:relative;z-index:2;padding:36px 40px;background:rgba(255,255,255,.90);border-radius:26px;box-shadow:0 30px 70px -20px rgba(0,20,40,.45);max-width:640px;margin:0 20px;}
-  .welcome-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:var(--blue);letter-spacing:.08em;margin-bottom:18px;}
-  #view-WELCOME h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(28px,4.2vw,42px);margin:0 0 12px;font-weight:700;color:var(--blue-ink);}
-  #view-WELCOME .subtitle{color:#1A2B3C;font-size:14.5px;max-width:460px;line-height:1.65;margin:0 auto 34px;}
-  .welcome-btn-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;max-width:640px;margin:0 auto;}
-  .welcome-btn{
-    background:var(--surface);border:1px solid var(--line);
-    color:var(--blue-ink);padding:18px 22px;border-radius:16px;cursor:pointer;width:170px;
-    display:flex;flex-direction:column;align-items:center;gap:9px;transition:all .2s;
-  }
-  .welcome-btn:hover{background:#E4EEFB;transform:translateY(-3px);}
-  .welcome-btn .ic{width:34px;height:34px;}
-  .welcome-btn .lbl{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;}
-  .welcome-btn .sub2{font-size:10.5px;color:#5B6B84;line-height:1.4;}
-  .welcome-btn.primary{background:linear-gradient(135deg,var(--blue),#3B82FF);border-color:transparent;color:#fff;}
-  .welcome-btn.primary .sub2{color:#DCEBFF;}
-  .welcome-btn.warm{background:linear-gradient(135deg,var(--warm),#ff9a6a);border-color:transparent;color:#fff;}
-  .welcome-btn.warm .sub2{color:#FFE7DA;}
+<!-- ================= END WELCOME SCREEN ================= -->
 
   /* ============ SPLIT SHELL ============ */
   .split-shell{position:absolute;inset:0;display:none;flex-direction:row;z-index:5;}
