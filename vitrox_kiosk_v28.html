@@ -527,12 +527,32 @@
 
   <!-- ============ SCREEN 1: WELCOME ============ -->
   <div class="view active" id="view-WELCOME">
-    <video id="welcomeAvaVideo" autoplay loop muted playsinline style="position:absolute; inset:0; width:100vw; height:100vh; object-fit:cover; z-index:0;">
+   <!-- 1. 加上 pointer-events:none，视频就不会挡住点击 -->
+    <video id="welcomeAvaVideo" autoplay loop muted playsinline style="position:absolute; inset:0; width:100vw; height:100vh; object-fit:cover; z-index:0; pointer-events:none;">
       <source src="seedance_video_avatar.mp4" type="video/mp4">
     </video>
-    <button id="exploreNowBtn" style="position:absolute;right:28px;bottom:28px;z-index:5;background:linear-gradient(135deg,var(--warm),#FF5E3A);color:#fff;border:none;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;padding:16px 30px;border-radius:100px;cursor:pointer;box-shadow:0 14px 34px -10px rgba(255,92,63,.6);display:flex;align-items:center;gap:8px;">
+
+    <!-- 2. 加上 onclick 事件和 z-index:999，点击立即开声音并显示菜单 -->
+    <button id="exploreNowBtn" onclick="enableAudioAndExplore()" style="position:absolute;right:28px;bottom:28px;z-index:999;background:linear-gradient(135deg,var(--warm),#FF5E3A);color:#fff;border:none;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;padding:16px 30px;border-radius:100px;cursor:pointer;box-shadow:0 14px 34px -10px rgba(255,92,63,.6);display:flex;align-items:center;gap:8px;">
       Start / Explore Now <span style="font-size:18px;">▶</span>
     </button>
+
+    <script>
+      function enableAudioAndExplore() {
+        const vid = document.getElementById('welcomeAvaVideo');
+        if (vid) {
+          vid.muted = false;
+          vid.currentTime = 0;
+          vid.play();
+        }
+        const content = document.getElementById('welcomeContent');
+        if (content) {
+          content.style.opacity = '1';
+          content.style.pointerEvents = 'all';
+          content.style.transform = 'translateY(0)';
+        }
+      }
+    </script>
     <div class="welcome-content" id="welcomeContent" style="opacity:0;pointer-events:none;transform:translateY(14px);transition:opacity .5s ease, transform .5s ease;">
       <div class="welcome-logo">VITROX INTERACTIVE SHOWROOM</div>
       <div id="aiSpeakingBadge" style="display:none;align-items:center;gap:7px;justify-content:center;margin-bottom:10px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;color:var(--blue);">
