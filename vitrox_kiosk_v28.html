@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+《》<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -531,9 +531,9 @@
     <!-- Reserved slot for your own avatar video — add a <source> below and it will
          play full-page as the welcome background. Leave empty and the building
          photo above stays visible as the fallback background. -->
-    <video class="welcome-video-slot" id="welcomeAvaVideo" autoplay loop muted playsinline>
-      <!-- <source src="welcome-avatar.mp4" type="video/mp4"> -->
-    </video>
+   <video class="welcome-video-slot" id="welcomeAvaVideo" autoplay loop playsinline>
+  <source src="seedance_video_avatar.mp4" type="video/mp4">
+</video>
     <button id="exploreNowBtn" style="position:absolute;right:28px;bottom:28px;z-index:5;background:linear-gradient(135deg,var(--warm),#FF5E3A);color:#fff;border:none;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;padding:16px 30px;border-radius:100px;cursor:pointer;box-shadow:0 14px 34px -10px rgba(255,92,63,.6);display:flex;align-items:center;gap:8px;">
       Start / Explore Now <span style="font-size:18px;">▶</span>
     </button>
@@ -3043,6 +3043,20 @@ document.getElementById('exploreNowBtn').addEventListener('click', (e)=>{
 /* ---- init ---- */
 applyStaticI18n();
 render();
+</script>
+  <script>
+  // 页面加载后尝试播放
+  const avaVid = document.getElementById('welcomeAvaVideo');
+  if (avaVid) {
+    avaVid.play().catch(() => {
+      // 若浏览器拦截自动有声播放，静音先行，点击屏幕任意位置立即开启声音
+      avaVid.muted = true;
+      avaVid.play();
+      window.addEventListener('click', () => {
+        avaVid.muted = false;
+      }, { once: true });
+    });
+  }
 </script>
 </body>
 </html>
